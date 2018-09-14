@@ -81,13 +81,9 @@ def train_net(sequence,orientation,root_dir,model_name,net,n_classes,csv_path, e
                 w=size
                 batch_size=temp_batch_size
             # Setup Dataloader
-            train_dataset = AtriaDataset(root_dir, if_subsequent=sequence,sequence_length=options.sequence_length,split='train',
-                                         extra_label_csv_path=csv_path,extra_label=True,augmentation=True,input_h=h,input_w=w,
-                                         preload_data=False,if_clahe=if_clahe,if_gamma_correction=if_gamma_correction,if_mip=if_mip,orientation=orientation)
+            train_dataset = AtriaDataset(root_dir, if_subsequent=sequence,sequence_length=options.sequence_length,split='train',extra_label_csv_path=csv_path,extra_label=True,augmentation=True,input_h=h,input_w=w,preload_data=False,if_clahe=if_clahe,if_gamma_correction=if_gamma_correction,if_mip=if_mip,orientation=orientation)
             train_loader = DataLoader(dataset=train_dataset,num_workers=16, batch_size=batch_size, shuffle=True)
-            test_dataset = AtriaDataset(root_dir, if_subsequent=sequence,split='validate',sequence_length=options.sequence_length,
-                                        extra_label_csv_path=csv_path,extra_label=True,augmentation=True,input_h=h,input_w=w,
-                                        preload_data=True,if_clahe=if_clahe,if_gamma_correction=if_gamma_correction,if_mip=if_mip,orientation=orientation)
+            test_dataset = AtriaDataset(root_dir, if_subsequent=sequence,split='validate',sequence_length=options.sequence_length,extra_label_csv_path=csv_path,extra_label=True,augmentation=True,input_h=h,input_w=w, preload_data=True,if_clahe=if_clahe,if_gamma_correction=if_gamma_correction,if_mip=if_mip,orientation=orientation)
             test_loader = DataLoader(dataset=test_dataset, num_workers=16, batch_size=batch_size, shuffle=True)
 
             print('''
@@ -201,6 +197,8 @@ if __name__ == '__main__':
                           type='float', help='learning rate')
         parser.add_option('-g', '--gpu', action='store_true', dest='gpu',
                           default=True, help='use cuda')
+        parser.add_option( '--num_gpus', type='int', dest='n_gpu',
+                          default=1, help='the number of gpus used for training')
         parser.add_option('-c', '--load', dest='load',
                           default=False, help='load file model')
         parser.add_option('-r','--resume_path',type=str, dest='resume',default=None,
@@ -213,6 +211,8 @@ if __name__ == '__main__':
                           help='save model name')
         parser.add_option('--orientation', type=str, dest='orientation',
                           help='training data orientation;axial,coronal,sagittal',default='axial')
+        parser.add_option('--mt', action='store_true', dest='MT',
+                          help='training data with classfication task', default=False)
         parser.add_option('--sequence', action='store_true', dest='sequence',
                           help='use pre+post slice as information', default=False)
         parser.add_option('--sequence_length', type=int, dest='sequence_length',
@@ -228,14 +228,15 @@ if __name__ == '__main__':
 
         root_dir=options.root_dir
         net = MT_Net(n_channels=options.sequence_length, spp_grid=SPP_GRID, n_classes=2, n_labels=2,
-                      if_dropout=True, upsample_type=options.upsample_type)
+                   if_dropout=True, upsample_type=options.upsample_type)
 
         if options.load:
             net.load_state_dict(torch.load(options.load))
             print('Model loaded from {}'.format(options.load))
 
         if options.gpu:
-            net = torch.nn.DataParallel(net, device_ids=[0,1])
+            gpu_id_list=[i for i in range(options.n_gpu)]
+            net = torch.nn.DataParallel(net, device_ids=gpu_id_list)
             net.cuda()
             cudnn.benchmark = True
         if options.gamma:

@@ -15,8 +15,8 @@ from predict_nrrd import preprocess_image
 if __name__=='__main__':
 
 
-    hard_ensemble=False # use aggregated prob instead of max-voting to get more smoothed result
-
+    hard_ensemble=False # if set to be false,we then use aggregated prob instead of max-voting to get more smoothed result
+    gpu=True
     model_dict = {
         'multi_task_network_1': 'models/atria_mt_model_dataset_0.pkl',
         'multi_task_network_2': 'models/atria_mt_model_dataset_1.pkl',
@@ -50,14 +50,11 @@ if __name__=='__main__':
                 raise NotImplementedError
 
             cache=torch.load(v)
-            try:
-                model.load_state_dict(cache['model_state'])
-                model = torch.nn.DataParallel(model, device_ids=[0])
-            except:
-                model = torch.nn.DataParallel(model, device_ids=[0])
-                model.load_state_dict(cache['model_state'])
 
-            model.cuda()
+            model.load_state_dict(cache['model_state'])
+            if gpu:
+                model = torch.nn.DataParallel(model, device_ids=[0])
+                model.cuda()
             model.eval()
             model_list.append(model)
 

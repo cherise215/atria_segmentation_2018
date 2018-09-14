@@ -20,7 +20,6 @@ class MT_Net(nn.Module):
         self.down4 = down(512, 512)
         self.down5 = down(512,512)
         self.up1 = up(512,512,512,type=upsample_type)
-
         self.up2 = up(512,512,256,type=upsample_type)
         self.up3 = up(256,256, 128,type=upsample_type)
         self.up4 = up(128,128, 64,type=upsample_type)
@@ -53,31 +52,6 @@ class MT_Net(nn.Module):
         x = self.outc(m5)
         return x
 
-    def get_multi_level_predict(self,x):
-
-        x1 = self.inc(x)  # N*64*H*w
-        x2 = self.down1(x1)  # N*128*h/2*w/2
-        x3 = self.down2(x2)  # N*256*h/4*w/4
-        x4 = self.down3(x3)  # N*512*h/8*w/8
-        x5 = self.down4(x4)  # N*512*h/16*w/16
-        x6 = self.down5(x5)  # N*512*h/32*w/32
-        m1 = self.up1(x6, x5)  # N*512*h/16*w/16
-        m1_seg = self.pred1(m1)
-
-        m2 = self.up2(m1, x4)  # N*256*h/8*w/8
-        m2_seg = self.pred2(m2)  # N*n_class*h/8*w/8
-
-        m3 = self.up3(m2, x3)  # N*128*h/4*w/4
-        m3_seg = self.pred3(m3)  #
-
-        m4 = self.up4(m3, x2)  # N*64*h/2*w/2
-        m4_seg = self.pred4(m4)  #
-
-        m5 = self.up5(m4, x1)  # N*64*h/1*w/1
-        x = self.outc(m5)
-        #### classifier
-        output = {'m1': m1_seg, 'm2': m2_seg, 'm3': m3_seg, 'm4': m4_seg, 'final': x}
-        return output
 
 
     def forward(self, x):
@@ -99,16 +73,14 @@ class MT_Net(nn.Module):
         #### classifier
         output=[]
         output.append(x)
-        if self.MT:
-            #spp = spatial_pyramid_pool(x6, x6.size(0), [int(x6.size(2)), int(x6.size(3))], out_bin_sizes=self.output_num)
-            spp = spatial_pyramid_pool(x5, x5.size(0), [int(x5.size(2)), int(x5.size(3))], out_bin_sizes=self.output_num)
-            print(spp.size)
-            fc1 = self.fc1(spp)
-            if self.if_dropout:
-                fc1 = self.dropout1(fc1)
-            fc2 = self.fc2(fc1)
-            class_output=fc2
-            output.append(class_output)
+        spp = spatial_pyramid_pool(x5, x5.size(0), [int(x5.size(2)), int(x5.size(3))], out_bin_sizes=self.output_num)
+        print(spp.size)
+        fc1 = self.fc1(spp)
+        if self.if_dropout:
+            fc1 = self.dropout1(fc1)
+        fc2 = self.fc2(fc1)
+        class_output=fc2
+        output.append(class_output)
         return output
 
     def get_net_name(self):
