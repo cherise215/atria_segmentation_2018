@@ -59,8 +59,8 @@
 
 
 # Train
-- `python train_atria_seg.py --name '$model_save_name$' -b 6  --root_dir '$your training dataset path$' --csv_path $csv_path$ `
-    - $model_save_name$ is a name used to save the model you trained
+- `python train_atria_seg.py --name '$predictor_path$' -b 6  --root_dir '$your training dataset path$' --csv_path $csv_path$ `
+    - $predictor_path$ is your saved model's abs path.
     - $your training dataset path$: is the training dataset directory which contains *train* and *validate* two subdirs.
         - training dataset path
             - `train`
