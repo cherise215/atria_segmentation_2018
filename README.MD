@@ -5,21 +5,29 @@
 
 
 # Install and Prepare
+## Environment
+- Python 3.5
+- Install Anaconda
+- Install CUDA, if your machine has a CUDA-enabled GPU.
+- create an Anaconda virtual environment to install allthe dependencies packages below
+    -- follow [How to create an anaconda virtual environment] (https://dziganto.github.io/data%20science/python/anaconda/Creating-Conda-Environments/)
+    -- pytorch==0.4.0 , e.g. `conda install pytorch torchvision -c pytorch` [ref](https://pytorch.org/get-started/locally/)
+
 ## Dependencies
-- Pytorch3
-- pandas==0.22.0
-- matplotlib==2.2.2
-- torchsample==0.1.3
-- nipy==0.4.2
-- MedPy==0.3.0
-- scipy==1.0.1
-- tqdm==4.23.0
-- scikit_image==0.13.1
-- numpy==1.14.2
-- torch==0.4.0
-- SimpleITK==1.1.0
-- scikit-image
-- tensorboardX==1.4
+- after activated virtual enviroment under project directory, `pip install -r requirements.txt`
+    - pandas==0.22.0
+    - matplotlib==2.2.2
+    - torchsample==0.1.3
+    - nipy==0.4.2
+    - MedPy==0.3.0
+    - scipy==1.0.1
+    - tqdm==4.23.0
+    - scikit_image==0.13.1
+    - numpy==1.14.2
+    - SimpleITK==1.1.0
+    - scikit-image
+    - tensorboardX==1.4
+
 
 ## Data
 ### Download all training and testing data.
