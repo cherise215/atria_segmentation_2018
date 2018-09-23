@@ -8,7 +8,7 @@
 ## Environment
 - Python 3.5
 - Install Anaconda
-- Install CUDA, if your machine has a CUDA-enabled GPU.
+- Install CUDA (cuda 9.0), if your machine has a CUDA-enabled GPU.
 - create an Anaconda virtual environment to install allthe dependencies packages below.
     - Follow the instructions from [How to create an anaconda virtual environment](https://dziganto.github.io/data%20science/python/anaconda/Creating-Conda-Environments/)
     - Install Pytorch. pytorch==0.4.0 , e.g. `conda install pytorch torchvision -c pytorch` [ref](https://pytorch.org/get-started/locally/)
