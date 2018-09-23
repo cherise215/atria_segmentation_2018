@@ -218,7 +218,7 @@ if __name__ == "__main__":
     parser.add_argument('--gamma', '-g', action='store_true',
                         help="preprocess image use gamma correction", default=False)
     parser.add_argument('--force_norm', action='store_true',
-                        help="always do normalization ", default=False)
+                        help="always do std normalization ", default=False)
     parser.add_argument('--batch_size',type=int,
                         help="batch size ", default=1)
     parser.add_argument('--post',  action='store_true',
