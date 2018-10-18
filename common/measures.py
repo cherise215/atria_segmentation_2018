@@ -974,7 +974,7 @@ def __surface_distances(result, reference, voxelspacing=None, connectivity=1):
     # binary structure
     footprint = generate_binary_structure(result.ndim, connectivity)
 
-    # test for emptiness
+    # validate for emptiness
     if 0 == numpy.count_nonzero(result):
         raise RuntimeError('The first supplied array does not contain any binary object.')
     if 0 == numpy.count_nonzero(reference):

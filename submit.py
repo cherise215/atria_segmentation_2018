@@ -1,4 +1,4 @@
-# used to predict all test images and encode results in a csv file
+# used to predict all validate images and encode results in a csv file
 
 import numpy as np
 import SimpleITK as sitk
