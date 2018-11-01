@@ -1,5 +1,5 @@
 # Multi-Task Convolutional Neural Networks for Atria Segmentation Challenge
-
+- The preprint version of this paper is available at [arxiv](https://arxiv.org/abs/1810.13205)
 - This repository contains code for [Atrial Segmentation challenge 2018](http://atriaseg2018.cardiacatlas.org/)
 - Training and testing data is available on the [web](http://atriaseg2018.cardiacatlas.org/data/)
 
