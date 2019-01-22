@@ -75,4 +75,4 @@
 
 # Visualization of training and validation loss and iou during training procedure.
 - open the terminal under your project dir.
-- run `tensorboard --logdir runs`
+- run `tensorboard --lo

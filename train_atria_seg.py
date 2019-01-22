@@ -80,6 +80,8 @@ def train_net(sequence,orientation,root_dir,model_name,net,n_classes,csv_path, e
                 h=96
                 w=size
                 batch_size=temp_batch_size
+            if batch_size==0:
+                batch_size=1
             # Setup Dataloader
             train_dataset = AtriaDataset(root_dir, if_subsequent=sequence,sequence_length=options.sequence_length,split='train',extra_label_csv_path=csv_path,extra_label=True,augmentation=True,input_h=h,input_w=w,preload_data=False,if_clahe=if_clahe,if_gamma_correction=if_gamma_correction,if_mip=if_mip,orientation=orientation)
             train_loader = DataLoader(dataset=train_dataset,num_workers=16, batch_size=batch_size, shuffle=True)
@@ -131,8 +133,8 @@ def train_net(sequence,orientation,root_dir,model_name,net,n_classes,csv_path, e
                 optimizer.step()
 
                 if (epoch_iter + 1) % 20 == 0:
-                    print("Epoch [%d/%d] Loss: %.4f" % (epoch+ 1, epochs, loss.data[0]))
-                    writer.add_scalar(options.model_name + '/loss',  loss.data[0], epoch+1)
+                    print("Epoch [%d/%d] Loss: %.4f" % (epoch+ 1, epochs, loss.item()))
+                    writer.add_scalar(options.model_name + '/loss',  loss.item(), epoch+1)
 
 
             net.eval()
