@@ -6,12 +6,12 @@
 
 # Install and Prepare
 ## Environment
-- Python 3.5
+- Python 3.6
 - Install Anaconda
 - Install CUDA (cuda 9.0), if your machine has a CUDA-enabled GPU.
 - create an Anaconda virtual environment to install allthe dependencies packages below.
     - Follow the instructions from [How to create an anaconda virtual environment](https://dziganto.github.io/data%20science/python/anaconda/Creating-Conda-Environments/)
-    - Install Pytorch. pytorch==0.4.0 , e.g. `conda install pytorch torchvision -c pytorch` [ref](https://pytorch.org/get-started/locally/)
+    - Install Pytorch `conda install pytorch torchvision -c pytorch` [ref](https://pytorch.org/get-started/locally/)
 
 ## Dependencies
 - after activated virtual enviroment under project directory, `pip install -r requirements.txt`
@@ -21,7 +21,6 @@
     - MedPy==0.3.0
     - scipy==1.0.1
     - tqdm==4.23.0
-    - scikit_image==0.13.1
     - numpy==1.14.2
     - SimpleITK==1.1.0
     - scikit-image

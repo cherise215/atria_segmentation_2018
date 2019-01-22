@@ -4,8 +4,7 @@ nipy==0.4.2
 MedPy==0.3.0
 scipy==1.0.1
 tqdm==4.23.0
-scikit_image==0.13.1
+scikit-image==0.13.1
 numpy==1.14.2
 SimpleITK==1.1.0
-skimage==0.0
 tensorboardX==1.4

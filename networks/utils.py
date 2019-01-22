@@ -75,8 +75,8 @@ def spatial_pyramid_pool(previous_conv, batch_size, previous_conv_size, out_bin_
         w_wid = int(math.ceil(previous_conv_size[1] / out_bin_sizes[i]))
         # h_stride = int(math.floor(previous_conv_size[0] / out_bin_sizes[i]))
         # w_stride = int(math.floor(previous_conv_size[1] / out_bin_sizes[i]))
-        h_pad = (h_wid * out_bin_sizes[i] - previous_conv_size[0] + 1) / 2
-        w_pad = (w_wid * out_bin_sizes[i] - previous_conv_size[1] + 1) / 2
+        h_pad = (h_wid * out_bin_sizes[i] - previous_conv_size[0] + 1) // 2
+        w_pad = (w_wid * out_bin_sizes[i] - previous_conv_size[1] + 1) // 2
         maxpool = nn.MaxPool2d(kernel_size=(h_wid, w_wid), stride=(h_wid, w_wid),padding=(h_pad,w_pad))
         x = maxpool(previous_conv)
         if (i == 0):
