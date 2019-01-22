@@ -11,7 +11,7 @@
 - Install CUDA (cuda 9.0), if your machine has a CUDA-enabled GPU.
 - create an Anaconda virtual environment to install allthe dependencies packages below.
     - Follow the instructions from [How to create an anaconda virtual environment](https://dziganto.github.io/data%20science/python/anaconda/Creating-Conda-Environments/)
-    - Install Pytorch `conda install pytorch torchvision -c pytorch` [ref](https://pytorch.org/get-started/locally/)
+    - Install Pytorch 1.0 `conda install pytorch torchvision -c pytorch` [ref](https://pytorch.org/get-started/locally/)
 
 ## Dependencies
 - after activated virtual enviroment under project directory, `pip install -r requirements.txt`
@@ -70,9 +70,9 @@
                 - patient_2
     - $csv_path$: specifies an csv file path which contains extra pre/post ablation label for each patient. This file should be download with the training data. Or you can find it under the $data directory.
 
-        - e.g. `python  train_atria_seg.py --name 'atria_mt_model'  --root_dir 'home/AtriaSeg_2018_training/cross_validation_dataset/0' --csv_path 'home/AtriaSeg_2018_training/data/pre post ablation recrods.csv'`
+        - e.g. `python  train_atria_seg_mt.py --name 'atria_mt_model'  --root_dir 'home/AtriaSeg_2018_training/cross_validation_dataset/0' --csv_path 'home/AtriaSeg_2018_training/data/pre post ablation recrods.csv'`
 
 
 # Visualization of training and validation loss and iou during training procedure.
 - open the terminal under your project dir.
-- run `tensorboard --lo
+- run `tensorboard --logdir runs`
