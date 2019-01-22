@@ -26,7 +26,7 @@
     - SimpleITK==1.1.0
     - scikit-image
     - tensorboardX==1.4
-- and then installed an adapted version of torch sample via : `pip install git+https://github.com/ozan-oktay/torchsample/`
+- and then install an adapted version of torch sample via : `pip install git+https://github.com/ozan-oktay/torchsample/`
 
 
 ## Data
