@@ -17,7 +17,6 @@
 - after activated virtual enviroment under project directory, `pip install -r requirements.txt`
     - pandas==0.22.0
     - matplotlib==2.2.2
-    - torchsample==0.1.3
     - nipy==0.4.2
     - MedPy==0.3.0
     - scipy==1.0.1
@@ -27,6 +26,7 @@
     - SimpleITK==1.1.0
     - scikit-image
     - tensorboardX==1.4
+- and then installed an adapted version of torch sample via : `pip install git+https://github.com/ozan-oktay/torchsample/`
 
 
 ## Data
