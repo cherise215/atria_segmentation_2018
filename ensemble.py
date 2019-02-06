@@ -91,10 +91,10 @@ if __name__=='__main__':
 
                 if not hard_ensemble:
                     probmap = F.softmax(outputs) #N*2*H*W
-                    final_prob_map[i:i*batch_size+batch_size]+=probmap
+                    final_prob_map[i*batch_size:i*batch_size+batch_size]+=probmap
                 else:
                     single_pred = np.argmax(outputs, axis=1)
-                    sum_predict[i:i * batch_size + batch_size] += single_pred ## add count
+                    sum_predict[i*batch_size:i * batch_size + batch_size] += single_pred ## add count
 
         ##average score
         if not hard_ensemble:
