@@ -11,8 +11,8 @@ from torch.utils.data import DataLoader
 import torch
 
 
-from networks.utils import get_scheduler
-from networks.multi_task_unet import MT_Net,cal_cls_acc
+from networks.utils import get_scheduler,cal_cls_acc
+from networks.multi_task_unet import MT_Net
 from networks.myloss import  cross_entropy_2D
 from data_io.atria_dataset import AtriaDataset
 from utils import runningScore
