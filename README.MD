@@ -3,6 +3,23 @@
 - This repository contains code for [Atrial Segmentation challenge 2018](http://atriaseg2018.cardiacatlas.org/)
 - Training and testing data is available on the [web](http://atriaseg2018.cardiacatlas.org/data/)
 
+## Paper
+Please cite our paper if you find it useful for your research.
+
+```
+@InProceedings{10.1007/978-3-030-12029-0_32,
+author="Chen, Chen
+and Bai, Wenjia
+and Rueckert, Daniel",
+title="Multi-task Learning for Left Atrial Segmentation on GE-MRI",
+booktitle="Statistical Atlases and Computational Models of the Heart. Atrial Segmentation and LV Quantification Challenges",
+year="2019",
+publisher="Springer International Publishing",
+address="Cham",
+pages="292--301",
+isbn="978-3-030-12029-0"
+}
+```
 
 # Install and Prepare
 ## Environment
@@ -76,3 +93,4 @@
 # Visualization of training and validation loss and iou during training procedure.
 - open the terminal under your project dir.
 - run `tensorboard --logdir runs`
+
