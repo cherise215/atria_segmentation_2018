@@ -26,12 +26,12 @@ isbn="978-3-030-12029-0"
 - Python 3.6
 - Install Anaconda
 - Install CUDA (cuda 9.0), if your machine has a CUDA-enabled GPU.
-- create an Anaconda virtual environment to install allthe dependencies packages below.
+- create an Anaconda virtual environment to install all the dependencies packages below.
     - Follow the instructions from [How to create an anaconda virtual environment](https://dziganto.github.io/data%20science/python/anaconda/Creating-Conda-Environments/)
     - Install Pytorch 1.0 `conda install pytorch torchvision -c pytorch` [ref](https://pytorch.org/get-started/locally/)
 
 ## Dependencies
-- after activated virtual enviroment under project directory, `pip install -r requirements.txt`
+- after having activated your virtual enviroment under this project directory (`conda activate $your_virtual environment`), run `pip install -r requirements.txt`
     - pandas==0.22.0
     - matplotlib==2.2.2
     - nipy==0.4.2
@@ -47,18 +47,18 @@ isbn="978-3-030-12029-0"
 
 ## Data
 ### Download all training and testing data.
- - for test data, simply unzip the data you download.
- - for trainining data:
-    - create a directory and then 2 sub directory `train` and `validate` set under it.
-    - randomly split training data into training set and validation set and then put it under its corresponding directory.
+ - for the testing data, simply unzip the data you download.
+ - for the trainining data:
+    - create a directory contains 2 sub directories: a `train` set and a `validate` set.
+    - randomly split the training data into this training set and the validation set with a ratio of 4:1.
 
 
 # Test
-- using a single model to predict:
+- You can eiter use a single model to predict:
     - open terminal under project dir,
     - type: `python predict_nrrd.py --model $model_path$  --input $test_dataset$ --save_name $predicted_result_name$ --force_norm`
-        - model_path: the path you saved your trained model for predict
-        - test_dataset: the parent dir which saves all patients data.
+        - model_path: the path you saved your trained model for predicting.
+        - test_dataset: the path where you unzipped the testing data.
             - test_dataset
                 - patient_1
                 - patient_2
@@ -69,15 +69,15 @@ isbn="978-3-030-12029-0"
         - e.g.`python predict_nrrd.py --model 'home/Atria_Seg/atria_mt_model.pkl' --input "home/AtriaSeg_2018_testing/"  --save_name "predict.nrrd" --force_norm --post`
 
 
-- Ensemble of multi models result.
+- Or use multiple models to get ensembled result with improved robustness.
     - `python ensemble.py`
-        - Before run: please change $test_dir$ and those paths in the $model_dict$ to your test dataset path and your downloaded models paths respectively.
+        - Before run: please change $test_dir$ and those paths in the $model_dict$ to your test dataset path and your models paths, respectively.
 
 
 # Train
 - `python train_atria_seg.py --name '$predictor_path$' -b 6  --root_dir '$your training dataset path$' --csv_path $csv_path$ `
     - $predictor_path$ is your saved model's abs path.
-    - $your training dataset path$: is the training dataset directory which contains *train* and *validate* two subdirs.
+    - $your training dataset path$: is the training dataset directory which contains *train* and *validate* dirs.
         - training dataset path
             - `train`
                 - patient_1
@@ -91,6 +91,6 @@ isbn="978-3-030-12029-0"
 
 
 # Visualization of training and validation loss and iou during training procedure.
-- open the terminal under your project dir.
+- open a new terminal under your project dir before training.
 - run `tensorboard --logdir runs`
 
