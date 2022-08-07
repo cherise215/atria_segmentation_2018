@@ -64,7 +64,7 @@ def train_net(sequence,orientation,root_dir,model_name,net,n_classes,csv_path, e
 
     temp_batch_size=batch_size
     for epoch in range(start_epoch,epochs):
-        scheduler.step(epoch)
+        
         total=0.
         acc=0.
         for size in image_size_list:
@@ -136,7 +136,7 @@ def train_net(sequence,orientation,root_dir,model_name,net,n_classes,csv_path, e
                     print("Epoch [%d/%d] Loss: %.4f" % (epoch+ 1, epochs, loss.item()))
                     writer.add_scalar(options.model_name + '/loss',  loss.item(), epoch+1)
 
-
+            scheduler.step()
             net.eval()
             for i_val,data in tqdm(enumerate(test_loader)):
                 images_val = data['input']
